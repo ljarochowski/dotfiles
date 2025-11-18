@@ -1,4 +1,4 @@
-# ⌨️ Moje Skróty Klawiszowe
+# ⌨️ My Key Bindings
 
 ## 🔵 Neovim (Leader = Space)
 
@@ -58,17 +58,17 @@
 
 ### Other
 - Ctrl+a r - Reload config
-- Ctrl+a I - Install TMUX plugins (duże i)
+- Ctrl+a I - Install TMUX plugins (capital i)
 
 ## 🟡 ZSH
 
 ### Vi-mode (Oh My Zsh plugin)
-- Esc lub Ctrl+[ - Normal mode
+- Esc or Ctrl+[ - Normal mode
 - i - Insert mode
 - v - Visual mode
 
 ### Custom
-- vim - Alias dla nvim
+- vim - Alias for nvim
 
 ## 🔴 iTerm2
 
@@ -77,3 +77,11 @@
 - Cmd+Shift+D - Split horizontally
 - Cmd+[ / Cmd+] - Switch tabs
 - Cmd+Option+Arrow - Switch panes
+
+## 🤖 Amazon Q Developer
+
+- leader+aq - Open Amazon Q chat
+- leader+ae (visual) - Explain selected code
+- leader+af (visual) - Fix selected code
+- leader+ao (visual) - Optimize selected code
+- leader+ar (visual) - Refactor selected code
