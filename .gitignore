@@ -1,0 +1,20 @@
+# Lazy.nvim
+nvim/lazy-lock.json
+
+# Java tools (compiled, don't commit)
+java-tools/java-debug/
+java-tools/vscode-java-test/
+
+# Keep downloaded jars
+!java-tools/lombok.jar
+!java-tools/eclipse-java-google-style.xml
+
+# Logs
+*.log
+
+# macOS
+.DS_Store
+
+# Local overrides (machine-specific, not tracked)
+**/local.lua
+**/*.local
