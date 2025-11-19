@@ -22,6 +22,10 @@ error() {
     echo -e "${RED}[ERROR]${NC} $1"
 }
 
+# Get script directory (dotfiles root) - FIXED!
+DOTFILES_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+info "Dotfiles directory: $DOTFILES_DIR"
+
 # Detect OS
 if [[ "$OSTYPE" == "darwin"* ]]; then
     OS="macos"
@@ -48,14 +52,13 @@ fi
 info "Installing dependencies..."
 
 if [[ "$OS" == "macos" ]]; then
-    # Core tools
-    brew install neovim tmux zsh starship node openjdk@21 jq fzf ripgrep fd maven
+    # Core tools (added colima, docker, docker-compose, zoxide)
+    brew install neovim tmux zsh starship node openjdk@21 jq fzf ripgrep fd maven \
+        colima docker docker-compose zoxide
     
-    # Nerd Fonts
+    # Nerd Fonts (removed deprecated 'brew tap')
     info "Installing Nerd Fonts..."
-    brew tap homebrew/cask-fonts
     
-    # Install Nerd Fonts (including Terminess which you use!)
     fonts=(
         "font-terminess-ttf-nerd-font"
         "font-jetbrains-mono-nerd-font"
@@ -81,6 +84,11 @@ elif [[ "$OS" == "linux" ]]; then
         curl -sS https://starship.rs/install.sh | sh
     fi
     
+    # Zoxide
+    if ! command -v zoxide &> /dev/null; then
+        curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+    fi
+    
     # Nerd Fonts for Linux
     info "Installing Nerd Fonts..."
     mkdir -p ~/.local/share/fonts
@@ -100,6 +108,7 @@ elif [[ "$OS" == "linux" ]]; then
     done
     
     fc-cache -fv
+    cd "$DOTFILES_DIR"
 fi
 
 # Install Oh My Zsh
@@ -138,21 +147,21 @@ if [ -e "$HOME/.config/nvim" ]; then
     mv "$HOME/.config/nvim" "$backup_dir/"
 fi
 mkdir -p "$HOME/.config"
-ln -sf "$HOME/dotfiles/nvim" "$HOME/.config/nvim"
+ln -sf "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 info "Neovim config linked ✓"
 
 # TMUX
 if [ -e "$HOME/.tmux.conf" ]; then
     mv "$HOME/.tmux.conf" "$backup_dir/"
 fi
-ln -sf "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.tmux.conf"
+ln -sf "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 info "TMUX config linked ✓"
 
 # ZSH
 if [ -e "$HOME/.zshrc" ]; then
     mv "$HOME/.zshrc" "$backup_dir/"
 fi
-ln -sf "$HOME/dotfiles/zsh/zshrc" "$HOME/.zshrc"
+ln -sf "$DOTFILES_DIR/zsh/zshrc" "$HOME/.zshrc"
 info "ZSH config linked ✓"
 
 # Set ZSH as default shell
@@ -175,20 +184,24 @@ info "  2. Configure iTerm2 font (see below)"
 info "  3. Open Neovim - plugins will finish installing"
 info "  4. In TMUX, press Ctrl+a then I (capital i) to install TMUX plugins"
 if [[ "$OS" == "macos" ]]; then
-    info "  5. Import iTerm2 profile from ~/dotfiles/iterm/profile.json"
-    info "  6. Run ./setup-java.sh for Java development setup"
+    info "  5. Import iTerm2 profile from $DOTFILES_DIR/iterm/profile.json"
+    info "  6. Run $DOTFILES_DIR/setup-java.sh for Java development setup"
 fi
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 info ""
 info "🔤 iTerm2 Font Configuration:"
 info "  Preferences → Profiles → Text → Font"
-info "  Recommended: Terminess Nerd Font Mono, size 15 (your current setup)"
+info "  Recommended: Terminess Nerd Font Mono, size 15"
 info "  Or choose: JetBrainsMono Nerd Font, Hack Nerd Font, FiraCode Nerd Font"
 info ""
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 info "💡 Local overrides:"
 info "  - ZSH: Create ~/.zshrc.local for machine-specific config"
 info "  - Neovim: Create ~/.config/nvim/lua/local.lua for machine-specific config"
+info ""
+info "🚀 Directory jumping with zoxide:"
+info "  After using directories, jump with: z <partial-name>"
+info "  Example: z dotfiles, z java, zi (interactive)"
 echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 info ""
 info "🔑 Backups saved to: $backup_dir"

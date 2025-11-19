@@ -1,43 +1,128 @@
 # ⌨️ My Key Bindings
 
-## 🔵 Neovim (Leader = Space)
+**Leader key:** Space
 
-### LSP & Java (nvim-jdtls)
+## 🔵 Navigation & File Management
+
+### File Explorer
+- leader+pv - Open Netrw file explorer
+
+### Telescope
+- leader+pf - Find files
+- Ctrl+p - Git files
+- leader+ps - Live grep (search in files)
+- leader+pb - Find buffers
+
+### Harpoon (Quick Navigation)
+- leader+a - Add file to harpoon
+- Ctrl+e - Toggle harpoon telescope menu
+- Ctrl+h - Jump to harpoon file 1
+- Ctrl+t - Jump to harpoon file 2
+- Ctrl+n - Jump to harpoon file 3
+- Ctrl+s - Jump to harpoon file 4
+- Ctrl+Shift+p - Previous harpoon file
+- Ctrl+Shift+n - Next harpoon file
+
+## 🟢 LSP (Language Server)
+
+### Navigation
 - gD - Go to declaration
 - gd - Go to definition
 - gi - Go to implementation
 - K - Hover documentation
 - Ctrl+k - Signature help
-- space+rn - Rename
-- space+ca - Code actions
-- space+f - Format file
+- leader+D - Type definition
 
-### Java specific
+### Code Actions
+- leader+rn - Rename
+- leader+ca - Code actions (normal & visual)
+- leader+f - Format file
+- leader+e - Show diagnostics float
+
+### Workspace
+- leader+wa - Add workspace folder
+- leader+wr - Remove workspace folder
+- leader+wl - List workspace folders
+
+## ☕ Java Specific (nvim-jdtls)
+
+### Refactoring
 - Ctrl+o - Organize imports
-- space+ev - Extract variable
-- space+ec - Extract constant
-- space+em (visual) - Extract method
+- leader+ev - Extract variable
+- leader+ec - Extract constant
+- leader+em (visual) - Extract method
 
-### Telescope
-- leader+ff - Find files
-- leader+fg - Live grep
-- leader+fb - Find buffers
+### Testing & Debugging
+- leader+vc - Test class (DAP)
+- leader+vm - Test nearest method (DAP)
 
-### Harpoon (quick navigation)
-- leader+a - Add file to harpoon
-- Ctrl+e - Toggle harpoon menu
+## 🐛 Debugging (nvim-dap)
 
-### Fugitive (Git)
-- leader+gs - Git status
+### Breakpoints
+- leader+bb - Toggle breakpoint
+- leader+bc - Conditional breakpoint
+- leader+bl - Log point
+- leader+br - Clear all breakpoints
+- leader+ba - List breakpoints (telescope)
 
-### Undotree
-- leader+u - Toggle undotree
+### Debug Controls
+- leader+dc - Continue
+- leader+dj - Step over
+- leader+dk - Step into
+- leader+do - Step out
+- leader+dd - Disconnect
+- leader+dt - Terminate
+- leader+dr - Toggle REPL
+- leader+dl - Run last
 
-### General
+### Debug Info
+- leader+di - Hover variables
+- leader+d? - Show scopes
+- leader+df - List frames (telescope)
+- leader+dh - List commands (telescope)
+
+## 🎨 Editing
+
+### Moving Lines
+- J (visual) - Move selected lines DOWN
+- K (visual) - Move selected lines UP
+- J (normal) - Join lines (keep cursor position)
+
+### Duplicating
+- leader+j - Duplicate line/selection below
+- leader+k - Duplicate line/selection above
+
+### Clipboard
+- leader+y - Yank to system clipboard
+- leader+Y - Yank whole line to system clipboard
+- leader+d - Delete to black hole register (doesn't affect clipboard)
+
+### Formatting
+- =ap - Format paragraph
+- leader+f - Format file (LSP)
+
+### Search & Replace
+- leader+s - Search/replace word under cursor
+- n - Next search result (centered)
+- N - Previous search result (centered)
+
+### Scrolling (Centered)
 - Ctrl+d - Scroll down (centered)
 - Ctrl+u - Scroll up (centered)
-- leader+y - Yank to system clipboard
-- leader+p - Paste from system clipboard
+
+## 🔧 Utilities
+
+### File Path
+- leader+yf - Yank file path to clipboard
+
+### Custom Functions
+- leader+cc - Custom function (check remap.lua)
+- leader+cs - Custom function (check remap.lua)
+- leader+cp - Custom function (check remap.lua)
+
+## 🔴 Git (Fugitive)
+
+- leader+gs - Git status
 
 ## 🟢 TMUX (Prefix = Ctrl+a)
 
@@ -67,8 +152,9 @@
 - i - Insert mode
 - v - Visual mode
 
-### Custom
+### Custom Aliases
 - vim - Alias for nvim
+- qtmux - Start TMUX with Amazon Q (60-40 split)
 
 ## 🔴 iTerm2
 
@@ -77,11 +163,3 @@
 - Cmd+Shift+D - Split horizontally
 - Cmd+[ / Cmd+] - Switch tabs
 - Cmd+Option+Arrow - Switch panes
-
-## 🤖 Amazon Q Developer
-
-- leader+aq - Open Amazon Q chat
-- leader+ae (visual) - Explain selected code
-- leader+af (visual) - Fix selected code
-- leader+ao (visual) - Optimize selected code
-- leader+ar (visual) - Refactor selected code

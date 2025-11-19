@@ -135,3 +135,14 @@ export PATH="$PATH:/Users/ljarochowski/.lmstudio/bin"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+# ============================================
+# Locale (English)
+# ============================================
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# ============================================
+# zoxide - smart directory jumper
+# ============================================
+eval "$(zoxide init zsh)"
